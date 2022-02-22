@@ -37,6 +37,7 @@ jobs:
           # E901	SyntaxError or IndentationError
           flake8 . --statistics --max-line-length=160 --select=E115,E262,E304,W391,E901 --show-source
           # continue-on-error: true
+'''
       - name: Test with pytest
         run: |
           pytest
@@ -45,3 +46,4 @@ jobs:
           coverage run -m pytest
           coverage report -m
           coverage html
+'''
