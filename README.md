@@ -8,5 +8,5 @@
 - When the branch has completed its tasks, it will be merged to main.
 
 ## Schema
-![Schema](https://github.com/minnnh/EC530/blob/main/project2/schema.png)
+![Schema](https://github.com/minnnh/Patients_Monitor/blob/main/schema.png)
 
