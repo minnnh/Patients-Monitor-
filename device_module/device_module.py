@@ -7,7 +7,7 @@ class Device:
     def __init__(self):
         logging.basicConfig()
         self.logger = logging.getLogger()
-        self.logger.setLevel(logging.DEBUG)
+        self.logger.setLevel(logging.INFO)
 
     def importdb(self, dbfile):
         con = sqlite3.connect(dbfile) # table.db
@@ -83,14 +83,16 @@ class Device:
     def control(self,dbfile):
         keys = list(data.keys())
         for key in keys:
-            print("control start")
+            # print("control start")
             self.get_device(key)
             a = self.check_user_id()
             b = self.check_device_id()
             c = self.check_role()
             if (a == b == c == True):
                 self.create_device(data[key],dbfile)
-            print("control end",self.user_id,"\n" )
+            else:
+                continue
+            # print("control end",self.user_id,"\n" )
 
 if __name__ == '__main__':
     dm = Device()
