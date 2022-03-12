@@ -40,7 +40,6 @@ class Device:
 
     def check_user_id(self):
         if self.user_id in self.user_id_list:
-            #print("--print----: The user id has been recorded.")
             self.logger.error("The user id has been recorded.")
         elif not isinstance(self.user_id, int):
             self.logger.error("The format of user id is wrong.")
@@ -103,6 +102,7 @@ class Device:
             if (a == b == c == True):
                 self.create_device(self.data[key],dbfile)
                 self.logger.info(f"your information is recorded succesfully\n")
+
             else:
                 self.logger.info(f"The user's information failed to be recorded.\n")
                 continue
