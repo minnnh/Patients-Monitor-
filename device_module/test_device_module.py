@@ -8,6 +8,7 @@ class TestDevice(unittest.TestCase):
 	def setUp(self):
 		""" set up the test data and the test method"""
 		print("setUp")
+		self.p = Device(self.js)
 
 		self.js = "device_module/data.json"
 		self.db = "device_module/table.db"
@@ -38,7 +39,6 @@ class TestDevice(unittest.TestCase):
 		self.assertEqual(role, ["Patient", "Driver", "Doctor", "Doctor"], message)
 
 	def test_create_device(self):
-		self.p = Device(self.js)
 		self.p.init(self.db, self.pyfile)
 
 		self.p.control(self.db, self.pyfile)
