@@ -4,7 +4,7 @@ import sqlite3
 import json
 
 class Device:
-    def __init__(self, jsfile):
+    def __init__(self, jsfile, dir, db_name):
         logging.basicConfig(format='%(levelname)s - %(message)s')
         self.logger = logging.getLogger()
         self.logger.setLevel(logging.INFO)
@@ -19,10 +19,10 @@ class Device:
         # os.system('python table.py')
         os.system(pyfile)
 
-    def importdb(self, dir, db_name):
+    def importdb(self, db_path):
         # get the data of the database
-        db_path = os.path.join(dir, db_name)
-        with sqlite3.connect(db_path) as con:
+        # db_path = os.path.join(dir, db_name)
+        con = sqlite3.connect(db_path) # table.db
 
         # con = sqlite3.connect(dbfile) # table.db
         con.row_factory = sqlite3.Row
@@ -91,13 +91,13 @@ class Device:
         conn.commit()
         conn.close
 
-    def control(self, dbfile, pyfile, dir, db_name):
+    def control(self, dbfile, pyfile, db_path):
         self.init(dbfile, pyfile)
 
         keys = list(self.data.keys())
         for key in keys:
             self.logger.info(f"number {key}'s data")
-            self.importdb(dir, db_name)
+            self.importdb(db_path)
 
             self.get_device(key)
             a = self.check_user_id()

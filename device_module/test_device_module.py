@@ -19,7 +19,10 @@ class TestDevice(unittest.TestCase):
 
 		f = open(self.js) # data.json
 		self.data = json.loads(f.read())
-	
+
+		dir = 'device_module/'
+		db_name = 'table.db'
+		self.db_path = os.path.join(dir, db_name)
 
 	def test_get_device(self):
 		""" check the get device fuction"""
@@ -41,10 +44,7 @@ class TestDevice(unittest.TestCase):
 
 	def test_create_device(self):
 		self.p.init(self.db, self.pyfile)
-
-		dir = 'device_module/'
-		db_name = 'table.db'
-		self.p.control(self.db, self.pyfile, dir, db_name)
+		self.p.control(self.db, self.pyfile, self.db_path)
 
 		conn = sqlite3.connect(self.db) # table.db
 		cur = conn.cursor()
