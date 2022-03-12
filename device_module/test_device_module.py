@@ -11,7 +11,7 @@ class TestDevice(unittest.TestCase):
 
 		self.js = "device_module/data.json"
 		self.db = "device_module/table.db"
-		pyfile = 'python table.py'
+		pyfile = 'python device_module/table.py'
 		self.user_id_list = [1, 2]
 		self.device_id_list = [3, 5]
 
