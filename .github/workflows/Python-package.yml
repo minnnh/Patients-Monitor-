@@ -40,8 +40,8 @@ jobs:
       - name: Test with pytest
         run: |
           pytest
-      - name: Run Coverage
-        run: |
-          coverage run -m pytest
-          coverage report -m
-          coverage html
+      #- name: Run Coverage
+      #  run: |
+      #    coverage run -m pytest
+      #    coverage report -m
+      #    coverage html
