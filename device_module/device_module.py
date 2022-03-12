@@ -89,7 +89,7 @@ class Device:
         conn.close
 
     def control(self, dbfile):
-        self.init(dbfile)
+        self.init(dbfile, pyfile)
 
         keys = list(self.data.keys())
         for key in keys:
