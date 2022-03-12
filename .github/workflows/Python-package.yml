@@ -45,3 +45,7 @@ jobs:
       #    coverage run -m pytest
       #    coverage report -m
       #    coverage html
+      - id: run-pytest
+        name: 'python'
+        entrypoint: '/usr/local/bin/python'
+        args: ["-m", "pytest"]
