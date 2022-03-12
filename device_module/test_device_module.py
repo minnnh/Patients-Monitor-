@@ -8,13 +8,14 @@ class TestDevice(unittest.TestCase):
 	def setUp(self):
 		""" set up the test data and the test method"""
 		print("setUp")
-		self.p = Device(self.js)
 
 		self.js = "device_module/data.json"
 		self.db = "device_module/table.db"
 		self.pyfile = 'python device_module/table.py'
 		self.user_id_list = [1, 2]
 		self.device_id_list = [3, 5]
+
+		self.p = Device(self.js)
 
 		f = open(self.js) # data.json
 		self.data = json.loads(f.read())
