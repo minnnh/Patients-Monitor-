@@ -12,11 +12,12 @@ class Device:
         f = open(jsfile) # data.json
         self.data = json.loads(f.read())
 
-    def init(self, dbfile):
+    def init(self, dbfile, pyfile):
         # first step is to initialize
         if os.path.exists(dbfile):
             os.remove(dbfile)
-        os.system('python table.py')
+        # os.system('python table.py')
+        os.system(pyfile)
 
     def importdb(self, dbfile):
         # get the data of the database
