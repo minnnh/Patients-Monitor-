@@ -8,18 +8,22 @@ class TestDevice(unittest.TestCase):
 	def setUp(self):
 		""" set up the test data and the test method"""
 		print("setUp")
+
+		self.js = "Patients_Monitor/device_module/data.json"
+		self.db = "Patients_Monitor/device_module/table.db"
+
 		self.user_id_list = [1, 2]
 		self.device_id_list = [3, 5]
 
-		f = open(js) # data.json
+		f = open(self.js) # data.json
 		self.data = json.loads(f.read())
 
-		p.init(db)
+		p.init(self.db)
 
 	def test_importdb(self):
 		""" check the import function"""
 		print("test importdb")
-		p.importdb(db)
+		p.importdb(self.db)
 
 		message = " The importdb() doesn't work successfully."
 		self.assertEqual(p.user_id_list, [1, 2], message)
@@ -44,9 +48,9 @@ class TestDevice(unittest.TestCase):
 		self.assertEqual(role, ["Patient", "Driver", "Doctor", "Doctor"], message)
 
 	def test_create_device(self):
-		p.control(db)
+		p.control(self.db)
 
-		conn = sqlite3.connect(db) # table.db
+		conn = sqlite3.connect(self.db) # table.db
 		cur = conn.cursor()
 
 		# test Users table
@@ -101,7 +105,7 @@ class TestDevice(unittest.TestCase):
 
 
 if __name__ == '__main__':
-	js  = "Patients_Monitor/device_module/data.json"
+	js = "Patients_Monitor/device_module/data.json"
 	db = "Patients_Monitor/device_module/table.db"
 	# p = Device("data.json")
 	p = Device(js)
