@@ -18,16 +18,17 @@ class TestDevice(unittest.TestCase):
 		f = open(self.js) # data.json
 		self.data = json.loads(f.read())
 
-		p.init(self.db)
+		self.p = Device(self.js)
+		self.p.init(self.db)
 
 	def test_importdb(self):
 		""" check the import function"""
 		print("test importdb")
-		p.importdb(self.db)
+		self.p.importdb(self.db)
 
 		message = " The importdb() doesn't work successfully."
-		self.assertEqual(p.user_id_list, [1, 2], message)
-		self.assertEqual(p.device_id_list, [3, 5], message)
+		self.assertEqual(self.p.user_id_list, [1, 2], message)
+		self.assertEqual(self.p.device_id_list, [3, 5], message)
 
 	def test_get_device(self):
 		""" check the get device fuction"""
@@ -37,10 +38,10 @@ class TestDevice(unittest.TestCase):
 
 		keys = list(self.data.keys())		
 		for key in keys:
-			p.get_device(key)
-			user_id.append(p.user_id)
-			device_id.append(p.device_id)
-			role.append(p.role)
+			self.p.get_device(key)
+			user_id.append(self.p.user_id)
+			device_id.append(self.p.device_id)
+			role.append(self.p.role)
 
 		message = " The get_device() doesn't work successfully."
 		self.assertEqual(user_id, [1, 5, 8, 8], message)
@@ -48,7 +49,7 @@ class TestDevice(unittest.TestCase):
 		self.assertEqual(role, ["Patient", "Driver", "Doctor", "Doctor"], message)
 
 	def test_create_device(self):
-		p.control(self.db)
+		self.p.control(self.db)
 
 		conn = sqlite3.connect(self.db) # table.db
 		cur = conn.cursor()
@@ -105,8 +106,8 @@ class TestDevice(unittest.TestCase):
 
 
 if __name__ == '__main__':
-	js = "device_module/data.json"
-	db = "device_module/table.db"
+	# js = "device_module/data.json"
+	# db = "device_module/table.db"
 	# p = Device("data.json")
-	p = Device(js)
+	# p = Device(js)
 	unittest.main()
