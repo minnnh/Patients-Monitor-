@@ -11,7 +11,7 @@ class TestDevice(unittest.TestCase):
 		print("setUp")
 
 		self.db = os.path.join('device_module/', 'table.db')
-		self.js = os.path.joini('device_module/', 'data.json')
+		self.js = os.path.join('device_module/', 'data.json')
 		# self.js = "device_module/data.json"
 		# self.db = "device_module/table.db"
 		self.pyfile = 'python device_module/table.py'
