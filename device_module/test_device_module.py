@@ -1,6 +1,7 @@
 import unittest
 import json
 import sqlite3
+import os
 from device_module import Device
 
 class TestDevice(unittest.TestCase):
