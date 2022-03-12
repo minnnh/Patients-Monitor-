@@ -4,7 +4,7 @@ import sqlite3
 import json
 
 class Device:
-    def __init__(self, jsfile, dir, db_name):
+    def __init__(self, jsfile):
         logging.basicConfig(format='%(levelname)s - %(message)s')
         self.logger = logging.getLogger()
         self.logger.setLevel(logging.INFO)
