@@ -17,9 +17,7 @@ class TestDevice(unittest.TestCase):
 
 		f = open(self.js) # data.json
 		self.data = json.loads(f.read())
-
-		self.p = Device(self.js)
-		self.p.init(self.db, self.pyfile)
+	
 
 	def test_get_device(self):
 		""" check the get device fuction"""
@@ -40,6 +38,9 @@ class TestDevice(unittest.TestCase):
 		self.assertEqual(role, ["Patient", "Driver", "Doctor", "Doctor"], message)
 
 	def test_create_device(self):
+		self.p = Device(self.js)
+		self.p.init(self.db, self.pyfile)
+
 		self.p.control(self.db, self.pyfile)
 
 		conn = sqlite3.connect(self.db) # table.db
