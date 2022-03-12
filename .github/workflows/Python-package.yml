@@ -39,9 +39,9 @@ jobs:
           # continue-on-error: true
       - name: Test with pytest
         run: |
-          #pytest
+          pytest
           #python ./device_module/device_module.py
-          python ./device_module/device_module_test.py
+          #python ./device_module/device_module_test.py
       #- name: Run Coverage
       #  run: |
       #    coverage run -m pytest
