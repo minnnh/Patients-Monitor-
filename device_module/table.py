@@ -1,4 +1,9 @@
 import sqlite3
+import os
+
+dbfile = os.path.join('device_module/', 'table.db')
+if os.path.exists(dbfile):
+    os.remove(dbfile)
 
 conn = sqlite3.connect('table.db')
 cur = conn.cursor()
