@@ -23,7 +23,7 @@ class TestDevice(unittest.TestCase):
 
 """
 	def test_importdb(self):
-		""" check the import function"""
+		 check the import function
 		print("test importdb")
 		self.p.importdb(self.db)
 
