@@ -53,7 +53,7 @@ class TestDevice(unittest.TestCase):
 		# self.p.init(self.db, self.pyfile)
 		self.p.control(self.db, self.pyfile)
 
-		conn = sqlite3.connect(self.db) # table.db
+		conn = sqlite3.connect(self.p.db) # table.db
 		cur = conn.cursor()
 
 		# test Users table
