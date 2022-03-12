@@ -25,7 +25,7 @@ class Device:
         self.BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 		self.db = os.path.join(self.BASE_DIR, dbfile)
 
-        con = sqlite3.connect(dbfile) # table.db
+        con = sqlite3.connect(self.db) # table.db
 
         # con = sqlite3.connect(dbfile) # table.db
         con.row_factory = sqlite3.Row
@@ -68,13 +68,13 @@ class Device:
         else:
             return True
 
-    def create_device(self, dt, dbfile):
+    def create_device(self, dt):
         Users = tuple(list(dt[0].values()))
         Devices = tuple(list(dt[1].values()))
         Measurements = tuple(list(dt[2].values()))
         Assignments = tuple(list(dt[3].values()))
 
-        conn = sqlite3.connect(dbfile) # table.db
+        conn = sqlite3.connect(self.db) # table.db
         cur = conn.cursor()
 
         sql_statement = 'INSERT INTO Users VALUES (?, ?, ?, ?, ?)'
@@ -107,7 +107,7 @@ class Device:
             b = self.check_device_id()
             c = self.check_role()
             if (a == b == c == True):
-                self.create_device(self.data[key],dbfile)
+                self.create_device(self.data[key])
                 self.logger.info(f"your information is recorded succesfully\n")
 
             else:
