@@ -20,9 +20,9 @@ class TestDevice(unittest.TestCase):
 		f = open(self.js) # data.json
 		self.data = json.loads(f.read())
 
-		dir = 'device_module/'
-		db_name = 'table.db'
-		self.db_path = os.path.join(dir, db_name)
+		#dir = 'device_module/'
+		#db_name = 'table.db'
+		self.db_path = os.path.join('device_module/', 'table.db')
 
 	def test_get_device(self):
 		""" check the get device fuction"""
