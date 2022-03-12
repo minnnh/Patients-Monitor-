@@ -7,7 +7,7 @@ cur.execute('CREATE TABLE Users(User_id INTEGER PRIMARY KEY, Name TEXT, Date_of_
 cur.execute('CREATE TABLE Devices(Device_id INTEGER PRIMARY KEY, MAC TEXT, Date_of_Purchase TEXT, User_id INTEGER, Fir_ver TEXT)')
 cur.execute('CREATE TABLE Measurements(User_id INTEGER PRIMARY KEY, Weight REAL, Height REAL, Temperature REAL, Systolic_Pressure REAL, Diastolic_Pressure REAL, Pulse REAL, Oximeter REAL, Glucometer REAL)')
 cur.execute('CREATE TABLE Assignments(Device_id INTEGER PRIMARY KEY, User_id INTEGER, Assigner_id INTEGER, Date_Assigned TEXT)')
-cur.execute('CREATE TABLE Storage(Premission INTEGER, User_id INTEGER PRIMARY KEY, Device_id INTEGER, Roles TEXT)')
+cur.execute('CREATE TABLE Storage(Premission INTEGER PRIMARY KEY AUTOINCREMENT, User_id INTEGER, Device_id INTEGER, Roles TEXT)')
 
 cur.execute('INSERT INTO Users VALUES(1, "AA", "07/28/99", "Patient", "Female")')
 cur.execute('INSERT INTO Users VALUES(2, "BB", "06/18/99", "Doctor", "Male")')
@@ -23,12 +23,6 @@ cur.execute('INSERT INTO Assignments VALUES(5, 2, 7, "02/04/22")')
 
 cur.execute('INSERT INTO Storage VALUES(01, 1, 3, "Patient")')
 cur.execute('INSERT INTO Storage VALUES(02, 2, 5, "Doctor")')
-
-# a = (6, "BA", "07/28/99", "Patient", "Female")
-# sql_statement = 'INSERT INTO Users VALUES (?, ?, ?, ?, ?)'
-# cur.executemany(sql_statement, [a])
-for row in cur.execute('SELECT * FROM Users'):
-	print(row)
 
 conn.commit()
 conn.close
