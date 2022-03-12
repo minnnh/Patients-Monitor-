@@ -88,7 +88,7 @@ class Device:
         conn.commit()
         conn.close
 
-    def control(self, dbfile):
+    def control(self, dbfile, pyfile):
         self.init(dbfile, pyfile)
 
         keys = list(self.data.keys())
@@ -110,4 +110,4 @@ class Device:
 
 if __name__ == '__main__':
     dm = Device("data.json") # "data.json"
-    dm.control("table.db") # "table.db"
+    dm.control("table.db", "table.py") # "table.db"
