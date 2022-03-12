@@ -58,9 +58,7 @@ class TestDevice(unittest.TestCase):
 
 		# test Users table
 		msg1 = "The 'Users' table is not created successfully."
-		test_Users = [(1, 'AA', '07/28/99', 'Patient', 'Female'), 
-				 (2, 'BB', '06/18/99', 'Doctor', 'Male'), 
-				 (8, 'CC', '02/18/97', 'Doctor', 'Male')]
+		test_Users = [(1, 'AA', '07/28/99', 'Patient', 'Female'), (2, 'BB', '06/18/99', 'Doctor', 'Male'), (8, 'CC', '02/18/97', 'Doctor', 'Male')]
 		Users = []
 		for u in cur.execute('SELECT * FROM Users'):
 			Users.append(u)
