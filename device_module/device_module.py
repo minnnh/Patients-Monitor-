@@ -22,6 +22,9 @@ class Device:
     def importdb(self, dbfile):
         # get the data of the database
         # db_path = os.path.join(dir, db_name)
+        self.BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+		self.db = os.path.join(self.BASE_DIR, dbfile)
+
         con = sqlite3.connect(dbfile) # table.db
 
         # con = sqlite3.connect(dbfile) # table.db

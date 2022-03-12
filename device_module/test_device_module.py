@@ -11,9 +11,9 @@ class TestDevice(unittest.TestCase):
 		print("setUp")
 
 		# self.db = os.path.join('device_module/', 'table.db')
-		self.BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-		self.db = os.path.join(self.BASE_DIR, 'device_module/table.db')
-		
+		#self.BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+		#self.db = os.path.join(self.BASE_DIR, 'table.db')
+		self.db = 'table.db'
 		self.js = os.path.join('device_module/', 'data.json')
 		# self.js = "device_module/data.json"
 		# self.db = "device_module/table.db"
