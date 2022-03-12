@@ -11,7 +11,7 @@ class TestDevice(unittest.TestCase):
 
 		self.js = "device_module/data.json"
 		self.db = "device_module/table.db"
-		pyfile = 'python device_module/table.py'
+		self.pyfile = 'python device_module/table.py'
 		self.user_id_list = [1, 2]
 		self.device_id_list = [3, 5]
 
@@ -19,7 +19,7 @@ class TestDevice(unittest.TestCase):
 		self.data = json.loads(f.read())
 
 		self.p = Device(self.js)
-		self.p.init(self.db, pyfile)
+		self.p.init(self.db, self.pyfile)
 
 	def test_importdb(self):
 		""" check the import function"""
@@ -49,7 +49,7 @@ class TestDevice(unittest.TestCase):
 		self.assertEqual(role, ["Patient", "Driver", "Doctor", "Doctor"], message)
 
 	def test_create_device(self):
-		self.p.control(self.db)
+		self.p.control(self.db, self.pyfile)
 
 		conn = sqlite3.connect(self.db) # table.db
 		cur = conn.cursor()
