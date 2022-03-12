@@ -19,9 +19,12 @@ class Device:
         # os.system('python table.py')
         os.system(pyfile)
 
-    def importdb(self, dbfile):
+    def importdb(self, dir, db_name):
         # get the data of the database
-        con = sqlite3.connect(dbfile) # table.db
+        db_path = os.path.join(dir, db_name)
+        with sqlite3.connect(db_path) as con:
+
+        # con = sqlite3.connect(dbfile) # table.db
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         cur.execute('SELECT * FROM Storage')
@@ -88,13 +91,13 @@ class Device:
         conn.commit()
         conn.close
 
-    def control(self, dbfile, pyfile):
+    def control(self, dbfile, pyfile, dir, db_name):
         self.init(dbfile, pyfile)
 
         keys = list(self.data.keys())
         for key in keys:
             self.logger.info(f"number {key}'s data")
-            self.importdb(dbfile)
+            self.importdb(dir, db_name)
 
             self.get_device(key)
             a = self.check_user_id()

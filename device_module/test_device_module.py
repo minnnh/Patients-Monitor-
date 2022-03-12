@@ -42,7 +42,9 @@ class TestDevice(unittest.TestCase):
 	def test_create_device(self):
 		self.p.init(self.db, self.pyfile)
 
-		self.p.control(self.db, self.pyfile)
+		dir = 'device_module/'
+		db_name = 'table.db'
+		self.p.control(self.db, self.pyfile, dir, db_name)
 
 		conn = sqlite3.connect(self.db) # table.db
 		cur = conn.cursor()
