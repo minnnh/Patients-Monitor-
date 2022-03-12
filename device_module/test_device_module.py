@@ -10,6 +10,8 @@ class TestDevice(unittest.TestCase):
 		""" set up the test data and the test method"""
 		print("setUp")
 
+		self.db = os.path.join('device_module/', 'table.db')
+		self.js = os.path.joini('device_module/', 'data.json')
 		# self.js = "device_module/data.json"
 		# self.db = "device_module/table.db"
 		self.pyfile = 'python device_module/table.py'
@@ -23,8 +25,7 @@ class TestDevice(unittest.TestCase):
 
 		#dir = 'device_module/'
 		#db_name = 'table.db'
-		self.db = os.path.join('device_module/', 'table.db')
-		self.js = os.path.joini('device_module/', 'data.json')
+
 
 	def test_get_device(self):
 		""" check the get device fuction"""
