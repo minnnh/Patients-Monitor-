@@ -14,7 +14,6 @@
     {"Device_id":9, "MAC":"12:00:5e:00:53:af", "Date_of_Purchase":"12/28/21", "User_id":1, "Fir_ver":"1.4.4"},
     {"User_id":8, "Weight":74, "Height":180, "Temperature":36.1, "Systolic_Pressure":112, "Diastolic_Pressure":80, "Pulse":70, "Oximeter":99, "Glucometer":7.3},
     {"Device_id":9, "User_id":8, "Assigner_id":8, "Date_Assigned":"01/02/22"}]
-    
     }
     
     

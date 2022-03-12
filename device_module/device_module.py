@@ -116,5 +116,5 @@ class Device:
                 continue
 
 if __name__ == '__main__':
-    dm = Device("data.json") # "data.json"
+    dm = Device("data.json") # "data.json" 
     dm.control("table.db", "table.py") # "table.db"
