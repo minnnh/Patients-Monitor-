@@ -12,12 +12,13 @@ class Device:
         f = open(jsfile) # data.json
         self.data = json.loads(f.read())
 
-    def importdb(self, dbfile):
+    def init(self, dbfile):
         # first step is to initialize
         if os.path.exists(dbfile):
             os.remove(dbfile)
         os.system('python table.py')
 
+    def importdb(self, dbfile):
         # get the data of the database
         con = sqlite3.connect(dbfile) # table.db
         con.row_factory = sqlite3.Row
@@ -39,6 +40,7 @@ class Device:
 
     def check_user_id(self):
         if self.user_id in self.user_id_list:
+            #print("--print----: The user id has been recorded.")
             self.logger.error("The user id has been recorded.")
         elif not isinstance(self.user_id, int):
             self.logger.error("The format of user id is wrong.")
@@ -80,13 +82,20 @@ class Device:
         
         sql_statement = 'INSERT INTO Assignments VALUES (?, ?, ?, ?)'
         cur.executemany(sql_statement, [Assignments])
-    
+
+        cur.execute(f'INSERT INTO Storage VALUES ((SELECT MAX(Premission) + 1 FROM Storage),{self.user_id}, {self.device_id}, "{self.role}")')
+
+        conn.commit()
+        conn.close
+
     def control(self, dbfile):
-        self.importdb(dbfile)
+        self.init(dbfile)
 
         keys = list(self.data.keys())
         for key in keys:
             self.logger.info(f"number {key}'s data")
+            self.importdb(dbfile)
+
             self.get_device(key)
             a = self.check_user_id()
             b = self.check_device_id()
@@ -97,8 +106,6 @@ class Device:
             else:
                 self.logger.info(f"The user's information failed to be recorded.\n")
                 continue
-            
-            print("\n\ncontrol end, the user id is ",self.user_id,"\n" )
 
 if __name__ == '__main__':
     dm = Device(jsfile) # "data.json"
