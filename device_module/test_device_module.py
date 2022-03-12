@@ -10,11 +10,11 @@ class TestDevice(unittest.TestCase):
 		""" set up the test data and the test method"""
 		print("setUp")
 
-		self.db = os.path.join('device_module/', 'table.db')
-		self.js = os.path.join('device_module/', 'data.json')
+		self.db = os.path.join('./', 'table.db')
+		self.js = os.path.join('./', 'data.json')
 		# self.js = "device_module/data.json"
 		# self.db = "device_module/table.db"
-		self.pyfile = 'python device_module/table.py'
+		self.pyfile = 'python ./table.py'
 		self.user_id_list = [1, 2]
 		self.device_id_list = [3, 5]
 
