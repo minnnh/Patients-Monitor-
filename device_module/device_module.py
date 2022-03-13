@@ -21,10 +21,8 @@ class Device:
 
     def importdb(self, dbfile):
         # get the data of the database
-        # db_path = os.path.join(dir, db_name)
         self.BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         self.db = os.path.join(self.BASE_DIR, dbfile)
-		#self.db = os.path.join(self.BASE_DIR, dbfile)
 
         con = sqlite3.connect(self.db) # table.db
 
@@ -42,9 +40,9 @@ class Device:
 
     def get_device(self, num):
         int(num)
-        self.user_id = self.data[num][0]['User_id']
-        self.device_id = self.data[num][1]['Device_id']
-        self.role = self.data[num][0]['Roles']
+        self.user_id = self.data[num]["Storage"]['User_id']
+        self.device_id = self.data[num]["Storage"]['Device_id']
+        self.role = self.data[num]["Storage"]['Roles']
 
     def check_user_id(self):
         if self.user_id in self.user_id_list:
@@ -70,10 +68,10 @@ class Device:
             return True
 
     def create_device(self, dt):
-        Users = tuple(list(dt[0].values()))
-        Devices = tuple(list(dt[1].values()))
-        Measurements = tuple(list(dt[2].values()))
-        Assignments = tuple(list(dt[3].values()))
+        Users = tuple(list(dt["Users"].values()))
+        Devices = tuple(list(dt["Devices"].values()))
+        Measurements = tuple(list(dt["Measurements"].values()))
+        Assignments = tuple(list(dt["Assignments"].values()))
 
         conn = sqlite3.connect(self.db) # table.db
         cur = conn.cursor()
@@ -117,4 +115,4 @@ class Device:
 
 if __name__ == '__main__':
     dm = Device("data.json") # "data.json" 
-    dm.control("table.db", "table.py") # "table.db"
+    dm.control("table.db", "python table.py") # "table.db"
