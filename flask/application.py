@@ -4,16 +4,18 @@ import json
 import sqlite3
 import os
 import sys
-
 sys.path.insert(0, '../device_module')
 from device_module import Device
 
-app = Flask(__name__)
-api = Api(app)
+application = Flask(__name__)
+api = Api(application)
+
+if os.path.exists('table.db'):
+	os.remove('table.db')
 
 os.system('python ../device_module/table.py')
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-db = os.path.join(BASE_DIR, '../device_module/table.db')
+db = os.path.join(BASE_DIR, 'table.db')
 
 conn = sqlite3.connect(db) # table.db
 cur = conn.cursor()
@@ -205,4 +207,4 @@ api.add_resource(Measurements, '/measurements')
 api.add_resource(Assignments, '/assignments')
 
 if __name__ == '__main__':
-	app.run(debug=True)  # run our Flask app
+	application.run(debug=True)  # run our Flask app
