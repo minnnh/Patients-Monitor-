@@ -8,8 +8,8 @@ import sys
 sys.path.insert(0, '../device_module')
 from device_module import Device
 
-app = Flask(__name__)
-api = Api(app)
+application = Flask(__name__)
+api = Api(application)
 
 os.system('python ../device_module/table.py')
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -208,4 +208,4 @@ api.add_resource(Assignments, '/assignments')
 
 if __name__ == '__main__':
 	#p = Device()
-	app.run(debug=True)  # run our Flask app
+	application.run(debug=True)  # run our Flask app
