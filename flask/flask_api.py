@@ -13,16 +13,14 @@ api = Api(app)
 
 os.system('python ../device_module/table.py')
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-db = os.path.join(BASE_DIR, '../device_module/table.db')
+#db = os.path.join(BASE_DIR, '../device_module/table.db')
+db = os.path.join(BASE_DIR, 'table.db')
 
-conn = sqlite3.connect(db) # table.db
-cur = conn.cursor()
-
-col_users = [i[0] for i in cur.execute('''SELECT * FROM Users''').description]
-col_devices = [i[0] for i in cur.execute('''SELECT * FROM Devices''').description]
-col_measurements = [i[0] for i in cur.execute('''SELECT * FROM Measurements''').description]
-col_assignments = [i[0] for i in cur.execute('''SELECT * FROM Assignments''').description]
-col_storage = [i[0] for i in cur.execute('''SELECT * FROM Storage''').description]
+col_users = ['User_id', 'Name', 'Date_of_Birth', 'Roles', 'Gender']
+col_devices = ['Device_id', 'MAC', 'Date_of_Purchase', 'User_id', 'Fir_ver']
+col_measurements = ['User_id', 'Weight', 'Height', 'Temperature', 'Systolic_Pressure', 'Diastolic_Pressure', 'Pulse', 'Oximeter', 'Glucometer']
+col_assignments = ['Device_id', 'User_id', 'Assigner_id', 'Date_Assigned']
+col_storage = ['Premission', 'User_id', 'Device_id', 'Roles']
 
 def insert_data(table, new_data):
 	data = tuple(list(new_data[table].values()))
@@ -78,7 +76,7 @@ class Storage(Resource):
 	def post(self):
 		parser = reqparse.RequestParser()  # initialize
 
-		for col in col_storage:
+		for col in col_storage[1:]:
 			parser.add_argument(col,required=True)
 
 		args = parser.parse_args()  # parse arguments to dictionary
@@ -92,12 +90,16 @@ class Storage(Resource):
 			json.dump(new_json, outfile)
 
 		p = Device('new_json.json')
-		p.importdb("table.db")
-		p.get_device(0)
+		#p.importdb("table.db")
+		p.importdb(db)
+		p.user_id = int(args['User_id'])
+		p.device_id = int(args['Device_id'])
+		p.role = args['Roles']
+		#p.get_device(0)
+
 		p.check_user_id()
 		p.check_device_id()
 		p.check_role()
-
 		if ((p.check_user_id() and p.check_device_id() and p.check_role())!=True):
 			return "There is something wrong in your infomation, please check it."
 		
@@ -205,4 +207,5 @@ api.add_resource(Measurements, '/measurements')
 api.add_resource(Assignments, '/assignments')
 
 if __name__ == '__main__':
+	#p = Device()
 	app.run(debug=True)  # run our Flask app
