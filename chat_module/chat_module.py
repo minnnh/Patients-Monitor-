@@ -4,7 +4,7 @@ import logging
 import datetime
 import json
 
-# dbfile = os.path.join('device_module/', 'table.db')
+dbfile = os.path.join('device_module/', 'table.db')
 if os.path.exists('chat_table.db'):
     os.remove('chat_table.db')
 
@@ -13,6 +13,7 @@ class Chat():
 		logging.basicConfig(format='%(levelname)s - %(message)s')
 		self.logger = logging.getLogger()
 		self.logger.setLevel(logging.INFO)
+		self.table_rec ={}
 
 	def check(self, user_id, connect_id):
 		if (isinstance(user_id, int) and isinstance(connect_id, int)):
@@ -56,9 +57,38 @@ class Chat():
 		# for row in cur.execute(f'SELECT * FROM User_{user_id}_Records'):
 		# 	print(row)
 		# print("test\n")
+		col_records = ['Record_Num', 'From_id', 'To_id', 'Message_Type', 'Content', 'Time']
+		col_connect = ['Record_Times', 'From_id', 'To_id', 'Message_Type', 'Content', 'Time']
+
+		self.data_rec = {}
+		num = 1
+		for row in cur.execute(f'SELECT * FROM User_{user_id}_Records'):
+			dic_rec = {}
+			for i in range(len(row)):
+				dic_rec[col_records[i]] = row[i]				
+			self.data_rec[f'user {user_id} record {num}'] = dic_rec
+			num += 1
+
+		# print(self.data_rec,"\n")
+
+		self.data_con = {}
+		num = 1
+		for row in cur.execute(f'SELECT * FROM {self.tt}'):
+			dic_con = {}
+			for i in range(len(row)):
+				dic_con[col_connect[i]] = row[i]				
+			self.data_con[f'user {user_id} and {connect_id} record'] = dic_con
+			num += 1
+		# print(self.data_con,"\n\n")
+		#self.table_rec = {}
+		#self.table_rec[f'user {user_id} record'] = self.data_rec
 
 		conn.commit()
 		conn.close
+		#self.i = 1
+		#self.table_rec ={}
+		self.table_rec[f'user {user_id} record'] = self.data_rec
+		print(self.table_rec, "\n")
 
 	def control(self, jsfile):
 		f = open(jsfile) # data.json
@@ -75,6 +105,8 @@ class Chat():
 				self.store_data(user_id, connect_id, message_type, content)
 			else:
 				print('there is something wrong')
+
 if __name__ == '__main__':
 	p = Chat()
 	p.control("dt.json")
+
