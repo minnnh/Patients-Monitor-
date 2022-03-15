@@ -76,4 +76,3 @@ class Records(Resource):
 api.add_resource(Records, '/chat') 
 if __name__ == '__main__':
 	application.run(debug=True)
-
