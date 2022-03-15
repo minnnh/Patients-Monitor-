@@ -78,4 +78,3 @@ class Chat():
 if __name__ == '__main__':
 	p = Chat()
 	p.control("dt.json")
-
