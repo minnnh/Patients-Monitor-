@@ -3,15 +3,12 @@ from flask_restful import Resource, Api, reqparse
 import json
 import sqlite3
 import os
-import sys
+from device_module.device_module import Device
 
-sys.path.insert(0, '../device_module')
-from device_module import Device
+# application = Flask(__name__)
+# api = Api(application)
 
-application = Flask(__name__)
-api = Api(application)
-
-os.system('python ../device_module/table.py')
+os.system('python device_module/table.py')
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 #db = os.path.join(BASE_DIR, '../device_module/table.db')
 db = os.path.join(BASE_DIR, 'table.db')
@@ -200,12 +197,12 @@ class Assignments(Resource):
 		insert_data("Assignments", new_data)
 		return new_data
     
-api.add_resource(Storage, '/create')  # '/users' is our entry point for Users
-api.add_resource(Users, '/users')  # and '/locations' is our entry point for Locations
-api.add_resource(Devices, '/devices')
-api.add_resource(Measurements, '/measurements')
-api.add_resource(Assignments, '/assignments')
+# api.add_resource(Storage, '/create')  # '/users' is our entry point for Users
+# api.add_resource(Users, '/users')  # and '/locations' is our entry point for Locations
+# api.add_resource(Devices, '/devices')
+# api.add_resource(Measurements, '/measurements')
+# api.add_resource(Assignments, '/assignments')
 
-if __name__ == '__main__':
-	#p = Device()
-	application.run(debug=True)  # run our Flask app
+# if __name__ == '__main__':
+# 	#p = Device()
+# 	application.run(debug=True)  # run our Flask app
