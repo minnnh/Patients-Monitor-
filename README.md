@@ -1,12 +1,12 @@
 # Project2
 # Patients Monitor Platform
-http://flask-env.eba-unimkryi.us-east-2.elasticbeanstalk.com/
+http://flask-env.eba-n2ygvpns.us-west-2.elasticbeanstalk.com/
 
 ## Design of Patients Monitor Platform
 - All the funtions' entrances of this platform are shown on the home page, and there the description of the platform is also on the home page.
-![entrances](https://github.com/minnnh/Patients_Monitor/blob/main/pics/entraces.png)
-- Users are able to go to different tables to complete their data through clicking different buttons.
+- Users are able to go to different tables to complete their data through clicking different hyperlinks.
 - The design of Patients Monitor Platform is made up of two parts, `Device` part and `Chat` part. Flask is used to implement the functions in this project. `application.py` is the file that composes the two parts into one application, by using flask.
+![entrances](https://github.com/minnnh/Patients_Monitor/blob/main/pics/entrances.png)
 
 ## Design of Device Module
 - `Device_Module.py` is the code of building the table of Device messages. There is defalut data in the table, which is created in `table.py`. In device part, five tables have been created: `Users`, `Devices`, `Measurements`, `Assignments`, and `Storage`.   
