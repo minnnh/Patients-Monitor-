@@ -6,18 +6,13 @@
 <h1 style="text-align: center;">Patient Monitor Platform</h1>
 <h2>Welcome to Patient Monitor !</h2>
 
-<form action="/create">
-	<p><input type="submit" value="create"/></p>
-<form action="/users">
-	<p><input type="submit" value="users"/></p>
-<form action="/devices">
-	<p><input type="submit" value="devices"/></p>
-<form action="/measurements">
-	<p><input type="submit" value="measurements"/></p>
-<form action="/assignments">
-	<p><input type="submit" value="assignments"/></p>
-<form action="/chat">
-	<p><input type="submit" value="chat"/></p>
+<p><a href="{{ url_for('Storage') }}">create</a></p>
+<p><a href="{{ url_for('Users') }}">users</a></p>
+<p><a href="{{ url_for('Devices') }}">devices</a></p>
+<p><a href="{{ url_for('Measurements') }}">measurements</a></p>
+<p><a href="{{ url_for('Assignments') }}">assignments</a></p>
+<p><a href="{{ url_for('chat') }}">chat</a></p>
+
 
 
 <h4>This website is a Patient Monitor platform, which could realize the functions below.</h4>

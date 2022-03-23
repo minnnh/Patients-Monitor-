@@ -3,7 +3,7 @@ from flask import Flask, redirect, url_for, render_template, request
 import json
 import sqlite3
 import os
-
+import requests
 import datetime
 
 application = Flask(__name__)
@@ -12,6 +12,7 @@ application = Flask(__name__)
 @application.route("/")
 def home():
 	return render_template("index.html")
+
 
 from flask_chat import *
 from flask_device import *
