@@ -18,7 +18,7 @@ cur.execute('INSERT INTO Users VALUES(1, "AA", "07/28/99", "Patient", "Female")'
 cur.execute('INSERT INTO Users VALUES(2, "BB", "06/18/99", "Doctor", "Male")')
 
 cur.execute('INSERT INTO Devices VALUES(3, "00:00:5e:00:53:af", "03/01/22", 1, "1.3.4")')
-cur.execute('INSERT INTO Devices VALUES(5, "00:00:44:00:53:ab", "02/01/22", 1, "1.8.9")')
+cur.execute('INSERT INTO Devices VALUES(5, "00:00:44:00:53:ab", "02/01/22", 2, "1.8.9")')
 
 cur.execute('INSERT INTO Measurements VALUES(1, 50.2, 164, 36.4, 110, 75, 70, 97, 7.4)')
 cur.execute('INSERT INTO Measurements VALUES(2, 63, 173, 35.7, 113, 77, 88, 96, 8.2)')

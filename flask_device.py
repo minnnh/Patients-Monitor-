@@ -1,11 +1,12 @@
 from flask import Flask, redirect, url_for, render_template, request
-from flask_restful import Resource, Api, reqparse
+#from flask_restful import Resource, Api, reqparse
 import json
 import sqlite3
 import os
 from device_module.device_module import Device
+from application import application
 
-# application = Flask(__name__)
+#application = Flask(__name__)
 # api = Api(application)
 
 os.system('python device_module/table.py')
@@ -65,22 +66,16 @@ def get_data(table, col):
 	con.close
 	return data
 
-class Storage(Resource):
-	def get(self):
-		#get_data("Storage")
-		return get_data("Storage", col_storage)
-		# return col_storage
-	def post(self):
-		parser = reqparse.RequestParser()  # initialize
-
-		for col in col_storage[1:]:
-			parser.add_argument(col,required=True)
-
-		args = parser.parse_args()  # parse arguments to dictionary
-
-		new_data = {"Storage":{'User_id': int(args['User_id']),
-					'Device_id': int(args['Device_id']),
-					'Roles': args['Roles']}}
+@application.route("/create", methods=["POST", "GET"])
+def Storage():
+	if request.method == "POST":
+		# user_id = int(request.form['User_id'])
+		# device_id = int(request.form['Device_id'])
+		# role = request.form['Roles']
+		#time = str(datetime.datetime.now())
+		new_data = {"Storage":{'User_id': int(request.form['User_id']),
+					'Device_id': int(request.form['Device_id']),
+					'Roles': request.form['Roles']}}
 		new_json = json.dumps(new_data)
 
 		with open('new_json.json', 'w') as outfile:
@@ -89,9 +84,9 @@ class Storage(Resource):
 		p = Device('new_json.json')
 		#p.importdb("table.db")
 		p.importdb(db)
-		p.user_id = int(args['User_id'])
-		p.device_id = int(args['Device_id'])
-		p.role = args['Roles']
+		p.user_id = int(request.form['User_id'])
+		p.device_id = int(request.form['Device_id'])
+		p.role = request.form['Roles']
 		#p.get_device(0)
 
 		p.check_user_id()
@@ -108,101 +103,77 @@ class Storage(Resource):
 		conn.close
 
 		return new_data
-		#return redirect(url_for("users"))
+	else:
+			data = get_data("Storage", col_storage)
+			return render_template("storage.html", data = data)
 
-class Users(Resource):
-	def get(self):
-		return get_data("Users", col_users)
-
-	def post(self):
-		parser = reqparse.RequestParser()  # initialize
-		for col in col_users:
-			parser.add_argument(col,required=True)
-
-		args = parser.parse_args()  # parse arguments to dictionary
-
-		new_data = {"Users":{'User_id': int(args['User_id']),
-					'Name': args['Name'],
-					'Date_of_Birth': args['Date_of_Birth'],
-					'Roles': args['Roles'],
-					'Gender': args['Gender']}}
+@application.route("/users", methods=["POST", "GET"])
+def Users():
+	if request.method == "POST":
+		new_data = {"Users":{'User_id': int(request.form['User_id']),
+					'Name': request.form['Name'],
+					'Date_of_Birth': request.form['Date_of_Birth'],
+					'Roles': request.form['Roles'],
+					'Gender': request.form['Gender']}}
 
 		insert_data("Users", new_data)
 
 		return new_data
+	else:
+			data = get_data("Users", col_users)
+			return render_template("users.html", data = data)
 
-class Devices(Resource):
-	def get(self):
-		return get_data("Devices", col_devices)
-
-	def post(self):
-		parser = reqparse.RequestParser()  # initialize
-		for col in col_devices:
-			parser.add_argument(col,required=True)
-
-		args = parser.parse_args()  # parse arguments to dictionary	
-
-		new_data = {"Devices":{'Device_id': int(args['Device_id']),
-					'MAC': args['MAC'],
-					'Date_of_Purchase': args['Date_of_Purchase'],
-					'User_id': int(args['User_id']),
-					'Fir_ver': args['Fir_ver']}}
+@application.route("/devices", methods=["POST", "GET"])
+def Devices():
+	if request.method == "POST":
+		new_data = {"Devices":{'Device_id': int(request.form['Device_id']),
+					'MAC': request.form['MAC'],
+					'Date_of_Purchase': request.form['Date_of_Purchase'],
+					'User_id': int(request.form['User_id']),
+					'Fir_ver': request.form['Fir_ver']}}
 
 		insert_data("Devices", new_data)
 
 		return new_data
+	else:
+			data = get_data("Devices", col_devices)
+			return render_template("devices.html", data = data)
 
-class Measurements(Resource):
-	def get(self):
-		return get_data("Measurements", col_measurements)
-
-	def post(self):
-		parser = reqparse.RequestParser()  # initialize
-		for col in col_measurements:
-			parser.add_argument(col,required=True)
-
-		args = parser.parse_args()  # parse arguments to dictionary	
-
-		new_data = {"Measurements":{'User_id': int(args['User_id']),
-					'Weight': float(args['Weight']),
-					'Height': float(args['Height']),
-					'Temperature': float(args['Temperature']),
-					'Systolic_Pressure': float(args['Systolic_Pressure']),
-					'Diastolic_Pressure': float(args['Diastolic_Pressure']),
-					'Pulse': float(args['Pulse']),
-					'Oximeter': float(args['Oximeter']),
-					'Glucometer': float(args['Glucometer'])}}
+@application.route("/measurements", methods=["POST", "GET"])
+def Measurements():
+	if request.method == "POST":
+		new_data = {"Measurements":{'User_id': int(request.form['User_id']),
+					'Weight': float(request.form['Weight']),
+					'Height': float(request.form['Height']),
+					'Temperature': float(request.form['Temperature']),
+					'Systolic_Pressure': float(request.form['Systolic_Pressure']),
+					'Diastolic_Pressure': float(request.form['Diastolic_Pressure']),
+					'Pulse': float(request.form['Pulse']),
+					'Oximeter': float(request.form['Oximeter']),
+					'Glucometer': float(request.form['Glucometer'])}}
 
 		insert_data("Measurements", new_data)
 
 		return new_data
+	else:
+			data = get_data("Measurements", col_measurements)
+			return render_template("measurements.html", data = data)
 
-class Assignments(Resource):
-	def get(self):
-		return get_data("Assignments", col_assignments)
-
-	def post(self):
-		parser = reqparse.RequestParser()  # initialize
-		for col in col_assignments:
-			parser.add_argument(col,required=True)
-
-		args = parser.parse_args()  # parse arguments to dictionary	
-
-		new_data = {"Assignments":{'Device_id': int(args['Device_id']),
-					'User_id': int(args['User_id']),
-					'Assigner_id': int(args['Assigner_id']),
-					'Date_Assigned': args['Date_Assigned'],
+@application.route("/assignments", methods=["POST", "GET"])
+def Assignments():
+	if request.method == "POST":
+		new_data = {"Assignments":{'Device_id': int(request.form['Device_id']),
+					'User_id': int(request.form['User_id']),
+					'Assigner_id': int(request.form['Assigner_id']),
+					'Date_Assigned': request.form['Date_Assigned'],
 					}}
 
 		insert_data("Assignments", new_data)
+
 		return new_data
-    
-# api.add_resource(Storage, '/create')  # '/users' is our entry point for Users
-# api.add_resource(Users, '/users')  # and '/locations' is our entry point for Locations
-# api.add_resource(Devices, '/devices')
-# api.add_resource(Measurements, '/measurements')
-# api.add_resource(Assignments, '/assignments')
+	else:
+			data = get_data("Assignments", col_assignments)
+			return render_template("assignments.html", data = data)
 
 # if __name__ == '__main__':
-# 	#p = Device()
 # 	application.run(debug=True)  # run our Flask app
