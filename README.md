@@ -1,6 +1,4 @@
 # Project2
-## Min Han  
-
 # Patients Monitor Platform
 http://flask-env.eba-unimkryi.us-east-2.elasticbeanstalk.com/
 
