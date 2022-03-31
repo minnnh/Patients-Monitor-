@@ -63,7 +63,7 @@ http://flask-env.eba-n2ygvpns.us-west-2.elasticbeanstalk.com/
         conn.commit()
         conn.close
     ```
-- `flask_device` is the code of implementing the function of getting and posting the data of tables. Users are able to get the data through go to the website http://flask-env.eba-unimkryi.us-east-2.elasticbeanstalk.com/ .
+- `flask_device` is the code of implementing the function of getting and posting the data of tables. Users are able to get the data through go to the website http://flask-env.eba-n2ygvpns.us-west-2.elasticbeanstalk.com/ .
   - Five tables mentioned above are all included in the code.
   ``` Python
   @application.route("/create", methods=["POST", "GET"])
@@ -102,7 +102,7 @@ http://flask-env.eba-n2ygvpns.us-west-2.elasticbeanstalk.com/
   def store_data(self, user_id, connect_id, message_type, content):
     ...
   ```
-- `flask_chat` is the code of implementing the function of getting and posting the data of the tables. Users are able to get the data through go to the website http://flask-env.eba-unimkryi.us-east-2.elasticbeanstalk.com/ .
+- `flask_chat` is the code of implementing the function of getting and posting the data of the tables. Users are able to get the data through go to the website http://flask-env.eba-n2ygvpns.us-west-2.elasticbeanstalk.com/ .
   - In the flask chat part, two tables are included into the same page.
   ``` Python
   @application.route("/chat", methods=["POST", "GET"])
